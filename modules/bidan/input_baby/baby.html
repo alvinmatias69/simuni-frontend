@@ -1,0 +1,48 @@
+<!-- <h3><i class="fa fa-angle-right"></i> Form Components</h3> -->
+
+<!-- BASIC FORM ELELEMNTS -->
+<div class="row mt">
+  <div class="col-lg-12">
+    <div class="alert alert-success alert-dismissable" ng-show="vm.showBanner">
+      <button type="button" class="close" aria-hidden="true" ng-click="vm.closeBox()">&times;</button>
+      <strong>Sukses!</strong> data yang anda input telah tersimpan
+    </div>
+    <div class="form-panel">
+      <h4 class="mb"><i class="fa fa-angle-right"></i> Input Jadwal Imunisasi</h4>
+      <form class="form-horizontal style-form" ng-submit="vm.inputBaby()">
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">Nama Bayi</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" required ng-model="vm.input.name" placeholder="nama bayi">
+            <span class="help-block">Masukan nama bayi dengan setiap kata diawali huruf besar (contoh: Matias Alvin)</span>
+          </div>
+
+          <label class="col-sm-2 col-sm-2 control-label">Nomor Telepon Orangtua</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" required ng-model="vm.input.phone_number" placeholder="nomor telepon">
+            <span class="help-block">Masukan nomor kontak dari orangtua / wali bayi (contoh: 0812345678)</span>
+          </div>
+
+          <label class="col-sm-2 col-sm-2 control-label">Berat Badan Bayi</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" required ng-model="vm.input.weight" placeholder="berat badan">
+            <span class="help-block">Masukan berat badan bayi dalam kilogram tanpa menyertakan satuan (contoh: 3)</span>
+          </div>
+
+          <label class="col-sm-2 col-sm-2 control-label">Panjang Bayi</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" required ng-model="vm.input.height" placeholder="panjang">
+            <span class="help-block">Masukan panjang bayi dalam sentimeter tanpa menyertakan satuan (contoh: 48)</span>
+          </div>
+
+          <label class="col-sm-2 col-sm-2 control-label">Tanggal Lahir</label>
+          <div class="col-sm-10">
+            <input type="date" class="form-control" required ng-model="vm.input.birth_date">
+            <span class="help-block">Masukan tanggal lahir dengan format mm-dd-yyyy (contoh: 08-15-2016)</span>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-theme">submit</button>
+      </form>
+    </div>
+  </div>
+</div>

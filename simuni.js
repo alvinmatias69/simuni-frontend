@@ -8,13 +8,44 @@
 	function config($stateProvider) {
 		
 		$stateProvider
+			.state('schedule', {
+				url:'/',
+				templateUrl: 'modules/schedule/schedule.html',
+				controller: 'scheduleController',
+				controllerAs: 'vm'
+			})
 			.state('login', {
 				url:'/login',
-				templateUrl:'modules/login/login.html'
+				templateUrl:'modules/login/login.html',
+				controller: 'loginController',
+				controllerAs: 'vm'
 			})
-			.state('dashboard', {
-				url: '/',
-				templateUrl: 'modules/bidan/bidan.html'
+			.state('bidan', {
+				url: '/bidan',
+				templateUrl: 'modules/bidan/dashboard/dashboard.html',
+				controller: 'bidanDashboardController',
+				controllerAs: 'vm',
+				data:{
+					state:"dashboard"
+				}
+			})
+			.state('bidan/schedule', {
+				url: '/bidan/schedule',
+				templateUrl: 'modules/bidan/input_schedule/schedule.html',
+				controller: 'inputScheduleController',
+				controllerAs: 'vm',
+				data:{
+					state:"schedule"
+				}
+			})
+			.state('bidan/baby', {
+				url: '/bidan/baby',
+				templateUrl: 'modules/bidan/input_baby/baby.html',
+				controller: 'inputBabyController',
+				controllerAs: 'vm',
+				data:{
+					state:"baby"
+				}
 			});
 
 	};
@@ -23,34 +54,49 @@
 
 		$rootScope.logout = function () {
 			authenticationService.logout();
+			$state.go('schedule');
 		}
+		$rootScope.isLogin = false;
 
-		// $rootScope.sideBar = "overflow: hidden; outline: none; margin-left: -210px;";
 		$rootScope.sideBar = true;
 		$rootScope.toggleSidebar = function () {
 			$rootScope.sideBar = !$rootScope.sideBar;
-			console.log($rootScope.sideBar);
 		}
 
-		$rootScope.isLogin = false;
+
+		$rootScope.baseUrl = 'http://localhost:8000';
 
 		if ($localStorage.currentUser) {
 			$http.defaults.headers.common.Authorization =  'bearer ' + $localStorage.currentUser.token;
 			$rootScope.isLogin = true;
-			$rootScope.username = $localStorage.currentUser.username;
+			$rootScope.name = $localStorage.currentUser.name;
+			$rootScope.type = $localStorage.currentUser.type;
 		}
 
 		$rootScope.$on('$locationChangeStart', function (event, next, current) {
-			var publicPages = ['/login'];
+			var publicPages = ['/login', '/'];
 			var restrictedPage = publicPages.indexOf($location.path()) === -1;
+
 			if (restrictedPage && !$localStorage.currentUser) {
-				$state.go('login');
+				$state.go('schedule');
 				// $rootScope.isLogin = true;
 			}
 
-			if ($localStorage.currentUser && $location.path('/login')) {
-				$state.go('dashboard');
+			if ($localStorage.currentUser && $location.path() == '/login') {
+				$state.go($localStorage.currentUser.type);
 			}
-		})
+
+			$rootScope.background = '';
+			$rootScope.loginPage = false;
+
+			if ($location.path() == '/login') {
+				$rootScope.background = 'assets/img/login-bg.jpg';
+				$rootScope.loginPage = true;	
+			}
+		});
+
+		$rootScope.$on('$stateChangeStart', function(event, toState){ 
+		    $rootScope.state = toState.data.state;
+		});
 	}
 })();

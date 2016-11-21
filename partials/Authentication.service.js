@@ -14,13 +14,10 @@
 
 		function login(username, password, callback) {
 			// to be edited link
-			$http.post('localhost:8000/api/authenticate', {username: username, password: password})
+			$http.post($rootScope.baseUrl + '/api/login', {username: username, password: password})
 				.success(function (response) {
-					if (response.code == "SUCCESS_POST") {
-						$localStorage.currentUser = {'username': username, 'token': response.content.token};
-						$http.defaults.headers.common.Authorization =  'bearer ' + response.content.token;
-						$rootScope.isLogin = true;
-						callback(true);
+					if (response.status == "SUCCESS_POST") {
+						callback(response.content);
 					}else{
 						callback(false);
 					}

@@ -1,0 +1,34 @@
+<section id="main-content" class="hide-sidebar">
+          <section class="wrapper">
+<h3 style="padding-left: 15px">SIMUNI Bayi</h3>
+<div class="col-md-12 mt">
+	<div class="content-panel">
+        <table class="table table-hover">
+	  	  <h4><i class="fa fa-angle-right"></i> Jadwal Imunisasi</h4>
+	  	  <hr>
+            <thead>
+            <tr>
+                <!-- <th>#</th> -->
+                <th><i class="fa fa-hashtag"></i> Nomor</th>
+                <th><i class="fa fa-location-arrow"></i> Lokasi</th>
+                <th><i class="fa fa-calendar"></i> Tanggal</th>
+                <th><i class="fa fa-user-md"></i> Bidan</th>
+                <th><i class="fa fa-medkit"></i> Vaksin</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="schedule in vm.schedules">
+                <td>{{ $index + 1 }}</td>
+                <td>{{ schedule.location }}</td>
+                <td>{{ schedule.date }}</td>
+                <td>{{ schedule.midwife }}</td>
+                <td>
+                    <span ng-repeat="vaccine in schedule.vaccines"><i class="fa fa-circle-o"></i> {{ vaccine.name }}<br></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+	  </div><! --/content-panel -->
+</div><!-- /col-md-12 -->
+</section>
+</section>

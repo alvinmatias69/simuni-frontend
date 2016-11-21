@@ -1,23 +1,30 @@
 <div id="login-page">
 	<div class="container">
 
-		<form class="form-login" action="index.html">
+
+		<form class="form-login" ng-submit="vm.login()">
 			<h2 class="form-login-heading">sign in now</h2>
 			<div class="login-wrap">
-				<input type="text" class="form-control" placeholder="User ID" autofocus>
+
+				<div class="alert alert-danger alert-dismissable" ng-show="vm.failLogin">
+					<button type="button" class="close" aria-hidden="true" ng-click="vm.closeBox()">&times;</button>
+					<strong>Sign in gagal!</strong> username atau password yang anda masukan salah.
+				</div>
+
+				<input type="text" class="form-control" placeholder="username" autofocus ng-model="vm.username">
 				<br>
-				<input type="password" class="form-control" placeholder="Password">
+				<input type="password" class="form-control" placeholder="Password" ng-model="vm.password">
 				<label class="checkbox">
 					<span class="pull-right">
-						<a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a>
+						<!-- <a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a> -->
 
 					</span>
 				</label>
-				<button class="btn btn-theme btn-block" ui-sref="dashboard" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
+				<button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
 			</div>
 
 			<!-- Modal -->
-			<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+			<!-- <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -35,13 +42,10 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<!-- modal -->
 
 		</form>	  	
 
 	</div>
 </div>
-
-<!--BACKSTRETCH-->
-<!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
