@@ -13,7 +13,6 @@
 		return Service;
 
 		function login(username, password, callback) {
-			// to be edited link
 			$http.post($rootScope.baseUrl + '/api/login', {username: username, password: password})
 				.success(function (response) {
 					if (response.status == "SUCCESS_POST") {

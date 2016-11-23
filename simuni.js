@@ -12,13 +12,28 @@
 				url:'/',
 				templateUrl: 'modules/schedule/schedule.html',
 				controller: 'scheduleController',
-				controllerAs: 'vm'
+				controllerAs: 'vm',
+				data:{
+					state:"schedule"
+				}
 			})
 			.state('login', {
 				url:'/login',
 				templateUrl:'modules/login/login.html',
 				controller: 'loginController',
-				controllerAs: 'vm'
+				controllerAs: 'vm',
+				data:{
+					state:"login"
+				}
+			})
+			.state('profile', {
+				url:'/profile',
+				templateUrl:'modules/profile/profile.html',
+				controller: "profileController",
+				controllerAs: "vm",
+				data:{
+					state:"profile"
+				}
 			})
 			.state('bidan', {
 				url: '/bidan',
@@ -46,6 +61,83 @@
 				data:{
 					state:"baby"
 				}
+			})
+			.state('baby', {
+				url: '/baby',
+				templateUrl: 'modules/baby/dashboard/dashboard.html',
+				controller: 'babyDashboardController',
+				controllerAs: 'vm',
+				data:{
+					state:"dashboard"
+				}
+			})
+			.state('baby/history', {
+				url: '/baby/history',
+				templateUrl: 'modules/baby/history/history.html',
+				controller: 'babyHistoryController',
+				controllerAs: 'vm',
+				data:{
+					state:"history"
+				}
+			})
+			.state('baby/profile', {
+				url: '/baby/profile',
+				templateUrl: 'modules/baby/profile/profile.html',
+				controller: 'profileBabyController',
+				controllerAs: 'vm',
+				data:{
+					state:"profile"
+				}
+			})
+			.state('admin', {
+				url: '/admin',
+				templateUrl: 'modules/admin/bidan/bidan.html',
+				controller: 'adminController',
+				controllerAs: 'vm',
+				data:{
+					state:"bidan"
+				}
+			})
+			.state('admin/bidan/form', {
+				url: '/admin/bidan/form',
+				templateUrl: 'modules/admin/formBidan/formBidan.html',
+				data:{
+					state:"bidan"
+				}
+			})
+			.state('admin/baby', {
+				url: '/admin/baby',
+				templateUrl: 'modules/admin/baby/baby.html',
+				controller: 'babyListController',
+				controllerAs: 'vm',
+				data:{
+					state:"baby"
+				}
+			})
+			.state('admin/baby/form',{
+				url: '/admin/baby/form',
+				templateUrl: 'modules/admin/formBaby/formBaby.html',
+				data:{
+					state:"baby"
+				}
+			})
+			.state('admin/vaccine', {
+				url: '/admin/vaccine',
+				templateUrl: 'modules/admin/vaccine/vaccine.html',
+				controller: 'vaccineListController',
+				controllerAs: 'vm',
+				data:{
+					state:"vaccine"
+				}
+			})
+			.state('admin/vaccine/form', {
+				url: '/admin/vaccine/form',
+				templateUrl: 'modules/admin/formVaccine/formVaccine.html',
+				controller: 'formVaccineController',
+				controllerAs: 'vm',
+				data:{
+					state:"vaccine"
+				}
 			});
 
 	};
@@ -63,14 +155,14 @@
 			$rootScope.sideBar = !$rootScope.sideBar;
 		}
 
-
 		$rootScope.baseUrl = 'http://localhost:8000';
 
 		if ($localStorage.currentUser) {
-			$http.defaults.headers.common.Authorization =  'bearer ' + $localStorage.currentUser.token;
+			$http.defaults.headers.common.Authorization =  $localStorage.currentUser.token;
 			$rootScope.isLogin = true;
 			$rootScope.name = $localStorage.currentUser.name;
 			$rootScope.type = $localStorage.currentUser.type;
+			$rootScope.id = $localStorage.currentUser.id;
 		}
 
 		$rootScope.$on('$locationChangeStart', function (event, next, current) {
@@ -82,7 +174,7 @@
 				// $rootScope.isLogin = true;
 			}
 
-			if ($localStorage.currentUser && $location.path() == '/login') {
+			if ($localStorage.currentUser && ($location.path() == '/login' || $location.path() == '/')) {
 				$state.go($localStorage.currentUser.type);
 			}
 

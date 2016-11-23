@@ -26,12 +26,13 @@
 					$rootScope.isLogin = true;
 					$rootScope.type = result.type;
 					$rootScope.name = result.name;
+					$rootScope.id = result.id;
 					if (result.type == 'bidan') {
 						$state.go('bidan');
 					}else if(result.type == 'admin'){
 						$state.go('admin');
 					}else{
-						$state.go('bayi');
+						$state.go('baby');
 					}
 				}else{
 					vm.failLogin = true;

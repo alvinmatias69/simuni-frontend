@@ -43,11 +43,22 @@
   <script src="modules/bidan/dashboard/bidan.controller.js"></script>
   <script src="modules/bidan/input_schedule/inputSchedule.controller.js"></script>
   <script src="modules/bidan/input_baby/inputBaby.controller.js"></script>
+  <script src="modules/baby/dashboard/baby.controller.js"></script>
+  <script src="modules/baby/history/history.controller.js"></script>
+  <script src="modules/baby/profile/profileBaby.controller.js"></script>
+  <script src="modules/profile/profile.controller.js"></script>
+  <script src="modules/admin/bidan/admin.controller.js"></script>
+  <script src="modules/admin/baby/babyList.controller.js"></script>
+  <script src="modules/admin/vaccine/vaccineList.controller.js"></script>
+  <script src="modules/admin/formVaccine/formVaccine.controller.js"></script>
 
   <!-- service script -->
   <script src="partials/Authentication.service.js"></script>
   <script src="partials/Schedule.service.js"></script>
   <script src="partials/Vaccine.service.js"></script>
+  <script src="partials/Bidan.service.js"></script>
+  <script src="partials/Baby.service.js"></script>
+  <script src="partials/User.service.js"></script>
 </head>
 
 <body>
@@ -256,8 +267,61 @@ MAIN SIDEBAR MENU
             </li>
 
             <li class="sub-menu">
+              <a ng-class="{'active' : state == 'profile'}" ui-sref="profile">
+                <i class="fa fa-pencil-square-o"></i>
+                <span>Edit Profile</span>
+              </a>
+            </li>
+          </div>
+
+          <div ng-if="type == 'baby'">
+            <li class="mt">
+              <a ng-class="{'active' : state == 'dashboard'}" ui-sref="baby">
+                <i class="fa fa-dashboard"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+
+            <li class="sub-menu">
+              <a ng-class="{'active' : state == 'history'}" ui-sref="baby/history">
+                <i class="fa fa-calendar-check-o"></i>
+                <span>History Imunisasi</span>
+              </a>
+            </li>
+
+            <li class="sub-menu">
               <!-- to be determined state -->
-              <a ng-class="{'active' : state == 'profile'}" ui-sref="bidan">
+              <a ng-class="{'active' : state == 'profile'}" ui-sref="baby/profile">
+                <i class="fa fa-pencil-square-o"></i>
+                <span>Edit Profile</span>
+              </a>
+            </li>
+          </div>
+
+          <div ng-if="type == 'admin'">
+            <li class="mt">
+              <a ng-class="{'active' : state == 'bidan'}" ui-sref="admin">
+                <i class="fa fa-user-md"></i>
+                <span>List Bidan</span>
+              </a>
+            </li>
+
+            <li class="sub-menu">
+              <a ng-class="{'active' : state == 'baby'}" ui-sref="admin/baby">
+                <i class="fa fa-child"></i>
+                <span>List Bayi</span>
+              </a>
+            </li>
+
+            <li class="sub-menu">
+              <a ng-class="{'active' : state == 'vaccine'}" ui-sref="admin/vaccine">
+                <i class="fa fa-medkit"></i>
+                <span>List Vaksin</span>
+              </a>
+            </li>
+
+            <li class="sub-menu">
+              <a ng-class="{'active' : state == 'profile'}" ui-sref="profile">
                 <i class="fa fa-pencil-square-o"></i>
                 <span>Edit Profile</span>
               </a>

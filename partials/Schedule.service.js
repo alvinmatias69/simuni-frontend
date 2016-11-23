@@ -5,20 +5,21 @@
 		.module('simuni')
 		.factory('scheduleService', service);
 
-	function service($http) {
+	function service($http, $rootScope) {
 		var Service = {};
 
 		Service.getAll = getAll;
 		Service.getByBidan = getByBidan;
-		Service.getByVaccines = getByVaccines;
+		Service.getByBaby = getByBaby;
+		Service.getByBabyHistory = getByBabyHistory;
 
 		return Service;
 
-		function getAll() {
+		function getAll(callback) {
 			// to be implement
-			$http.get($rootScope.baseUrl + '/api/')
+			$http.get($rootScope.baseUrl + '/api/schedules')
 				.success(function(response) {
-					if (response.status == "SUCCESS_GET") {
+					if (response.code == "SUCCESS_GET") {
 						callback(response.content);
 					}else{
 						callback(false);
@@ -26,11 +27,11 @@
 				});
 		}
 
-		function getByBidan(id) {
+		function getByBidan(id, callback) {
 			// to be implement
 			$http.get($rootScope.baseUrl + '/api/')
 				.success(function(response) {
-					if (response.status == "SUCCESS_GET") {
+					if (response.code == "SUCCESS_GET") {
 						callback(response.content);
 					}else{
 						callback(false);
@@ -38,11 +39,23 @@
 				});
 		}
 
-		function getByVaccines(arrVaccines) {
+		function getByBaby(id, callback) {
 			// to be implement
 			$http.get($rootScope.baseUrl + '/api/')
 				.success(function(response) {
-					if (response.status == "SUCCESS_GET") {
+					if (response.code == "SUCCESS_GET") {
+						callback(response.content);
+					}else{
+						callback(false);
+					}
+				});
+		}
+
+		function getByBabyHistory(id, callback) {
+			// to be implement
+			$http.get($rootScope.baseUrl + '/api/')
+				.success(function(response) {
+					if (response.code == "SUCCESS_GET") {
 						callback(response.content);
 					}else{
 						callback(false);

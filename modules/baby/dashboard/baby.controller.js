@@ -1,7 +1,7 @@
 (function() {
 	angular
 		.module('simuni')
-		.controller('bidanDashboardController', controller);
+		.controller('babyDashboardController', controller);
 
 	function controller(scheduleService, $rootScope) {
 		var vm = this;
@@ -37,7 +37,7 @@
 
 		function getData() {
 			// to be determined url
-			scheduleService.getByBidan($rootScope.id, function(result) {
+			scheduleService.getByBaby($rootScope.id, function(result) {
 				if (result) {
 					vm.schedules = result;
 				}

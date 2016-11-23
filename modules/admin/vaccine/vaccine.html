@@ -1,0 +1,25 @@
+<!-- <h3 style="padding-left: 15px">SIMUNI Bayi</h3> -->
+<div class="row mt">
+  <div class="col-lg-12">
+    <div class="form-panel">
+        <table class="table table-hover">
+	  	  <h4><i class="fa fa-angle-right"></i> Daftar Vaksin <button type="button" class="btn btn-theme pull-right" ui-sref="admin/vaccine/form">Input Vaksin Baru</button></h4>
+          <br>
+	  	  <hr>
+            <thead>
+            <tr>
+                <!-- <th>#</th> -->
+                <th><i class="fa fa-hashtag"></i> Nomor</th>
+                <th><i class="fa fa-medkit"></i> Nama</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="vaccine in vm.vaccineList">
+                <td>{{ $index + 1 }}</td>
+                <td>{{ vaccine.name }}</td>
+            </tr>
+            </tbody>
+        </table>
+	  </div><! --/content-panel -->
+    </div>
+</div><!-- /col-md-12 -->
