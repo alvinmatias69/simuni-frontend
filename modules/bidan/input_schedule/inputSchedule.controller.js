@@ -10,16 +10,7 @@
 		vm.showBanner;
 		vm.input = {};
 		vm.input.vaccines = [];
-		vm.vaccineList = [
-			{
-				id:1,
-				name:"polio"
-			},
-			{
-				id:2,
-				name:"tetanus"
-			}
-		];
+		vm.vaccineList = [];
 		vm.selectedVaccines = [];
 		vm.inputJadwal = inputJadwal;
 		vm.closeBox = closeBox;
@@ -30,19 +21,27 @@
 			vm.input.date = '';
 			vm.input.location = '';
 			vm.showBanner = false;
-			// to be implemented
-			// vaccineService.getAll(function (result) {
-			// 	if (result) {
-			// 		vm.vaccineList = result;
-			// 	}
-			// })
+			vaccineService.getAll(function (result) {
+				if (result) {
+					vm.vaccineList = result;
+				}
+			})
 		}
 
 		function inputJadwal() {
 			for (var i = 0; i < vm.selectedVaccines.length; i++) {
-				vm.input.vaccines.push(vm.selectedVaccines[i]);
+				if (vm.selectedVaccines[i] != undefined) {
+					vm.input.vaccines.push(vm.selectedVaccines[i]);
+				}
 			}
-			vm.showBanner = true;
+			vm.input.vaccines = '['+vm.input.vaccines.toString()+']';
+			scheduleService.insertSchedule(vm.input, function(result) {
+				if (result) {
+					vm.showBanner = true;
+					vm.input.vaccines = [];
+					vm.input = {};
+				}
+			})
 		}
 
 		function closeBox() {

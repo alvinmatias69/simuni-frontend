@@ -1,11 +1,11 @@
 (function () {
 	'use strict';
 
-	angular.module('simuni', ['ui.router', 'ngMessages', 'ngStorage', 'ngRoute'])
+	angular.module('simuni', ['ui.router', 'ngMessages', 'ngStorage', 'ngRoute', 'ui.select', 'ngSanitize'])
 		.config(config)
 		.run(run);
 
-	function config($stateProvider) {
+	function config($stateProvider, $urlRouterProvider) {
 		
 		$stateProvider
 			.state('schedule', {
@@ -62,6 +62,15 @@
 					state:"baby"
 				}
 			})
+			.state('bidan/record', {
+				url: '/bidan/record',
+				templateUrl: 'modules/bidan/record/record.html',
+				controller: 'recordController',
+				controllerAs: 'vm',
+				data:{
+					state:"record"
+				}
+			})
 			.state('baby', {
 				url: '/baby',
 				templateUrl: 'modules/baby/dashboard/dashboard.html',
@@ -101,6 +110,8 @@
 			.state('admin/bidan/form', {
 				url: '/admin/bidan/form',
 				templateUrl: 'modules/admin/formBidan/formBidan.html',
+				controller: 'formBidanController',
+				controllerAs: 'vm',
 				data:{
 					state:"bidan"
 				}
@@ -117,6 +128,8 @@
 			.state('admin/baby/form',{
 				url: '/admin/baby/form',
 				templateUrl: 'modules/admin/formBaby/formBaby.html',
+				controller: 'formBabyController',
+				controllerAs: 'vm',
 				data:{
 					state:"baby"
 				}
@@ -139,6 +152,8 @@
 					state:"vaccine"
 				}
 			});
+
+			$urlRouterProvider.otherwise("/");
 
 	};
 

@@ -5,15 +5,25 @@
 		.module('simuni')
 		.controller('inputBabyController', controller);
 
-	function controller() {
+	function controller(babyService) {
 		var vm = this;
 		vm.input = {};
-		vm.inputBaby = inputBaby;
+		vm.insert = insert;
 		vm.closeBox = closeBox;
 		vm.showBanner = false;
+		vm.failInsert = false;
 
-		function inputBaby() {
-			vm.input = {};
+		function insert() {
+			if (vm.input.password != vm.input.passwordConf) {
+				vm.failInsert = true;
+			}else{
+				babyService.insertBaby(vm.input, function(result) {
+					if (result) {
+						vm.failInsert = false;
+						vm.input = {};
+					}
+				});
+			}
 			vm.showBanner = true;
 		}
 

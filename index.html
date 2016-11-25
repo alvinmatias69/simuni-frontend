@@ -7,7 +7,7 @@
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-  <title>DASHGUM - FREE Bootstrap Admin Template</title>
+  <title>SIMUNI - Sistem Informasi Imunisasi Bayi</title>
 
   <!-- Bootstrap core CSS -->
   <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -21,6 +21,8 @@
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="assets/css/style-responsive.css" rel="stylesheet">
 
+  <link rel="stylesheet" type="text/css" href="assets/css/simuni.css">
+
   <script src="assets/js/chart-master/Chart.js"></script>
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -30,6 +32,7 @@
 
   <!-- angular source -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-sanitize.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
@@ -37,20 +40,26 @@
 
   <!-- angular script -->
   <script src="simuni.js"></script>
+
   <!-- mvvm script -->
   <script src="modules/schedule/schedule.controller.js"></script>
   <script src="modules/login/login.controller.js"></script>
+  <script src="modules/profile/profile.controller.js"></script>
   <script src="modules/bidan/dashboard/bidan.controller.js"></script>
   <script src="modules/bidan/input_schedule/inputSchedule.controller.js"></script>
   <script src="modules/bidan/input_baby/inputBaby.controller.js"></script>
+  <script src="modules/bidan/record/record.controller.js"></script>
+
   <script src="modules/baby/dashboard/baby.controller.js"></script>
   <script src="modules/baby/history/history.controller.js"></script>
   <script src="modules/baby/profile/profileBaby.controller.js"></script>
-  <script src="modules/profile/profile.controller.js"></script>
+
   <script src="modules/admin/bidan/admin.controller.js"></script>
   <script src="modules/admin/baby/babyList.controller.js"></script>
   <script src="modules/admin/vaccine/vaccineList.controller.js"></script>
   <script src="modules/admin/formVaccine/formVaccine.controller.js"></script>
+  <script src="modules/admin/formBaby/formBaby.controller.js"></script>
+  <script src="modules/admin/formBidan/formBidan.controller.js"></script>
 
   <!-- service script -->
   <script src="partials/Authentication.service.js"></script>
@@ -59,6 +68,9 @@
   <script src="partials/Bidan.service.js"></script>
   <script src="partials/Baby.service.js"></script>
   <script src="partials/User.service.js"></script>
+
+  <!-- select script -->
+  <script src="node_modules/ui-select/dist/select.js"></script>
 </head>
 
 <body>
@@ -68,7 +80,7 @@
       <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
     </div>
     <!--logo start-->
-    <a href="index.html" class="logo"><b>SIMUNI Bayi</b></a>
+    <a ng-href="" class="logo"><b>SIMUNI Bayi</b></a>
     <!--logo end-->
     <div class="nav notify-row" id="top_menu">
       <!--  notification start -->
@@ -263,6 +275,13 @@ MAIN SIDEBAR MENU
               <a ng-class="{'active' : state == 'baby'}" ui-sref="bidan/baby">
                 <i class="fa fa-child"></i>
                 <span>Input Data Bayi</span>
+              </a>
+            </li>
+
+            <li class="sub-menu">
+              <a ng-class="{'active' : state == 'record'}" ui-sref="bidan/record">
+                <i class="fa fa-pencil"></i>
+                <span>Catat Imunisasi Bayi</span>
               </a>
             </li>
 

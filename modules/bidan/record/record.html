@@ -1,0 +1,47 @@
+<!-- <h3><i class="fa fa-angle-right"></i> Form Components</h3> -->
+
+<!-- BASIC FORM ELELEMNTS -->
+<div class="row mt">
+  <div class="col-lg-12">
+    <div class="alert alert-success alert-dismissable" ng-show="vm.showBanner">
+      <button type="button" class="close" aria-hidden="true" ng-click="vm.closeBox()">&times;</button>
+      <strong>Sukses!</strong> data yang anda input telah tersimpan
+    </div>
+    <div class="form-panel">
+      <h4 class="mb"><i class="fa fa-angle-right"></i> Catat Imunisasi Bayi</h4>
+      <form class="form-horizontal style-form" ng-submit="vm.inputData()">
+        <div class="form-group">
+          <label class="col-sm-2 col-sm-2 control-label">Jadwal Imunisasi</label>
+          <div class="col-sm-10">
+            <select class="form-control" ng-model="vm.input.schedule" required>
+              <option ng-repeat="schedule in vm.schedules" value="{{schedule.schedule_date}}">{{schedule.schedule_date}} ({{schedule.location}})</option>
+            </select>
+            <span class="help-block">Pilih tanggal imunisasi dilakukan</span>
+          </div>
+
+          <label class="col-sm-2 col-sm-2 control-label">Bayi</label>
+          <div class="col-sm-10">
+            <ui-select multiple ng-model="vm.input.babies" close-on-select="false">
+              <ui-select-match placeholder="Pilih bayi yang diimunisasi">{{$item.user.name}}</ui-select-match>
+              <ui-select-choices repeat="baby.user.id as baby in vm.babies | filter: $select.search track by $index">
+                <div ng-bind-html="baby.user.name | highlight: $select.search"></div>
+                <small>
+                  username : <span ng-bind-html="baby.user.username | highlight: $select.search"></span>
+                </small>
+              </ui-select-choices>
+            </ui-select>
+            <span class="help-block">Pilih bayi yang diimunisasi (bisa lebih dari 1)</span>
+          </div>
+          <label class="col-sm-2 col-sm-2 control-label">Jadwal Imunisasi</label>
+          <div class="col-sm-10">
+            <select class="form-control" ng-model="vm.input.vaccine" required>
+              <option ng-repeat="vaccine in vm.vaccines" value="{{vaccine.id}}">{{vaccine.name}}</option>
+            </select>
+            <span class="help-block">Pilih jenis imunisasi</span>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-theme">submit</button>
+      </form>
+    </div>
+  </div>
+</div>
