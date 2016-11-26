@@ -22,11 +22,13 @@
 					$localStorage.currentUser.token = 'bearer ' + result.token;
 					$localStorage.currentUser.id = result.id;
 					$localStorage.currentUser.name = result.name;
+					$localStorage.currentUser.urlFoto = result.urlFoto;
 					$http.defaults.headers.common.Authorization =  'bearer ' + result.token;
 					$rootScope.isLogin = true;
 					$rootScope.type = result.type;
 					$rootScope.name = result.name;
 					$rootScope.id = result.id;
+					$rootScope.urlFoto = result.urlFoto;
 					if (result.type == 'bidan') {
 						$state.go('bidan');
 					}else if(result.type == 'admin'){

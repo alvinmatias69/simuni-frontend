@@ -11,6 +11,8 @@
 		Service.insertBaby = insertBaby;
 		Service.getDetail = getDetail;
 		Service.update = update;
+		Service.deleteBaby = deleteBaby;
+		Service.updateParts = updateParts;
 
 		return Service;
 
@@ -56,6 +58,39 @@
 
 		function update(baby, callback) {
 			$http.put($rootScope.baseUrl + '/api/bayiUpdate/' + $rootScope.id, {
+				name : baby.name,
+				username : baby.username,
+				father_name : baby.father_name,
+				mother_name : baby.mother_name,
+				phone_number : baby.phone_number,
+				weight : baby.weight,
+				height : baby.height,
+				birth_date : baby.birth_date,
+				password : baby.password
+			})
+				.success(function(response) {
+					if (response.code == "SUCCESS_PUT") {
+						callback(true);
+					}else{
+						callback(false);
+					}
+				})
+		}
+
+		function deleteBaby(id, callback) {
+			$http.delete($rootScope.baseUrl + '/api/babyDelete/' + id)
+				.success(function(response) {
+					console.log(response);
+					if (response.code == "SUCCESS_DELETE") {
+						callback(true);
+					}else{
+						callback(false);
+					}
+				})
+		}
+
+		function updateParts(baby, callback) {
+			$http.put($rootScope.baseUrl + '/api/bayiUpdate/' + baby.id, {
 				name : baby.name,
 				username : baby.username,
 				father_name : baby.father_name,

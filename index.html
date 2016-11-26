@@ -68,9 +68,21 @@
   <script src="partials/Bidan.service.js"></script>
   <script src="partials/Baby.service.js"></script>
   <script src="partials/User.service.js"></script>
+  <script src="partials/Data.service.js"></script>
 
   <!-- select script -->
   <script src="node_modules/ui-select/dist/select.js"></script>
+
+  <!-- upload script -->
+  <script src="node_modules/ng-file-upload/dist/ng-file-upload.js"></script>
+  <script src="node_modules/ng-file-upload/dist/ng-file-upload-shim.js"></script>
+
+  <!-- tooltip -->
+  <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip(); 
+    });
+  </script>
 </head>
 
 <body>
@@ -251,7 +263,7 @@ MAIN SIDEBAR MENU
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
 
-          <p class="centered"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></p>
+          <p class="centered image-upload" data-toggle="tooltip" data-placement="right" title="Klik untuk upload foto"><label for="file-input"><img ng-src="{{baseUrl}}/avatar/{{urlFoto}}" class="img-circle" width="60" height="60"></label> <input id="file-input" type="file" ngf-select="uploadAvatar($file, $invalidFiles)" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB"></p>
           <h5 class="centered">{{ name }}</h5>
 
           <div ng-if="type == 'bidan'">

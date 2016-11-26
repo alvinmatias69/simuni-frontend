@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	angular.module('simuni', ['ui.router', 'ngMessages', 'ngStorage', 'ngRoute', 'ui.select', 'ngSanitize'])
+	angular.module('simuni', ['ui.router', 'ngMessages', 'ngStorage', 'ngRoute', 'ui.select', 'ngSanitize', 'ngFileUpload'])
 		.config(config)
 		.run(run);
 
@@ -157,7 +157,7 @@
 
 	};
 
-	function run($rootScope, $http, $location, $localStorage, authenticationService, $state) {
+	function run($rootScope, $http, $location, $localStorage, authenticationService, $state, Upload, $window) {
 
 		$rootScope.logout = function () {
 			authenticationService.logout();
@@ -172,12 +172,29 @@
 
 		$rootScope.baseUrl = 'http://localhost:8000';
 
+		$rootScope.uploadAvatar = function (file, errFile) {
+			if (file) {
+				file.upload = Upload.upload({
+					url: $rootScope.baseUrl + '/api/avatar/' + $rootScope.id,
+					data: {image: file}
+				});
+
+				file.upload.then(function (response) {
+					$rootScope.urlFoto = response.data.content.urlFoto;
+					$localStorage.currentUser.urlFoto = $rootScope.urlFoto;
+					$window.location.reload();
+				})
+			}
+		}
+
+
 		if ($localStorage.currentUser) {
 			$http.defaults.headers.common.Authorization =  $localStorage.currentUser.token;
 			$rootScope.isLogin = true;
 			$rootScope.name = $localStorage.currentUser.name;
 			$rootScope.type = $localStorage.currentUser.type;
 			$rootScope.id = $localStorage.currentUser.id;
+			$rootScope.urlFoto = $localStorage.currentUser.urlFoto;
 		}
 
 		$rootScope.$on('$locationChangeStart', function (event, next, current) {
@@ -193,11 +210,15 @@
 				$state.go($localStorage.currentUser.type);
 			}
 
+			if (($location.path().slice(0,6) == '/admin' && $localStorage.currentUser.type != 'admin') || ($location.path().slice(0,6) == '/bidan' && $localStorage.currentUser.type != 'bidan') || ($location.path().slice(0,5) == '/baby' && $localStorage.currentUser.type != 'baby')) {
+				$state.go($localStorage.currentUser.type);
+			}
+
 			$rootScope.background = '';
 			$rootScope.loginPage = false;
 
 			if ($location.path() == '/login') {
-				$rootScope.background = 'assets/img/login-bg.jpg';
+				$rootScope.background = 'assets/img/bg.png';
 				$rootScope.loginPage = true;	
 			}
 		});

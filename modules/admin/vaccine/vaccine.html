@@ -11,12 +11,34 @@
                 <!-- <th>#</th> -->
                 <th><i class="fa fa-hashtag"></i> Nomor</th>
                 <th><i class="fa fa-medkit"></i> Nama</th>
+                <th><i class="fa fa-wrench"></i> Action</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="vaccine in vm.vaccineList">
                 <td>{{ $index + 1 }}</td>
                 <td>{{ vaccine.name }}</td>
+                <td>
+                    <button type="button" class="btn btn-theme03 btn-xs" ng-click="vm.update(vaccine)"><i class="fa fa-pencil"> Edit</i></button> 
+                    <button type="button" class="btn btn-theme04 btn-xs" data-toggle="modal" data-target="#modals{{$index}}"><i class="fa fa-times"></i> Delete</button>
+                    <div class="modal fade" id="modals{{$index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Konfirmasi Hapus</h4>
+                          </div>
+                          <div class="modal-body">
+                            Apa anda yakin ingin menghapus data vaksin {{vaccine.name}} ?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-info" ng-click="vm.deleteVaccine(vaccine)" data-dismiss="modal">Hapus</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </td>
             </tr>
             </tbody>
         </table>

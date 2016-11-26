@@ -372,3 +372,13 @@ body > .ui-select-bootstrap.open {
   border: 1px solid #ed5565;
   box-shadow: none;
 }
+
+.image-upload > input
+{
+    display: none;
+}
+
+.image-upload img
+{
+    cursor: pointer;
+}

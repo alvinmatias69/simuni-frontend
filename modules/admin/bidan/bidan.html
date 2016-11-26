@@ -1,6 +1,12 @@
 <!-- <h3 style="padding-left: 15px">SIMUNI Bayi</h3> -->
 <div class="row mt">
   <div class="col-lg-12">
+
+    <div class="alert alert-success alert-dismissable" ng-show="vm.showBanner">
+      <button type="button" class="close" aria-hidden="true" ng-click="vm.closeBox()">&times;</button>
+      <strong>Sukses!</strong> data berhasil dihapus
+    </div>
+
     <div class="form-panel">
         <table class="table table-hover">
 	  	  <h4><i class="fa fa-angle-right"></i> Daftar Bidan <button type="button" class="btn btn-theme pull-right" ui-sref="admin/bidan/form">Input Bidan Baru</button></h4>
@@ -13,6 +19,7 @@
                 <th><i class="fa fa-address-card"></i> Nama</th>
                 <th><i class="fa fa-at"></i> Username</th>
                 <th><i class="fa fa-mobile"></i> Nomor Handphone</th>
+                <th><i class="fa fa-wrench"></i> Action</th>
             </tr>
             </thead>
             <tbody>
@@ -21,6 +28,27 @@
                 <td>{{ bidan.name }}</td>
                 <td>{{ bidan.username }}</td>
                 <td>{{ bidan.phone_number }}</td>
+                <td>
+                    <button type="button" class="btn btn-theme03 btn-xs" ng-click="vm.editBidan(bidan)"><i class="fa fa-pencil"> Edit</i></button> 
+                    <button type="button" class="btn btn-theme04 btn-xs" data-toggle="modal" data-target="#modals{{$index}}"><i class="fa fa-times"></i> Delete</button>
+                    <div class="modal fade" id="modals{{$index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Konfirmasi Hapus</h4>
+                          </div>
+                          <div class="modal-body">
+                            Apa anda yakin ingin menghapus data user {{bidan.username}} ?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-info" ng-click="vm.deleteBidan(bidan)" data-dismiss="modal">Hapus</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </td>
             </tr>
             </tbody>
         </table>

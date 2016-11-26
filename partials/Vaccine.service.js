@@ -10,6 +10,8 @@
 
 		Service.getAll = getAll;
 		Service.input = input;
+		Service.deleteVaccine = deleteVaccine;
+		Service.update = update;
 
 		return Service;
 
@@ -29,6 +31,29 @@
 				name: name
 			}).success(function(response) {
 				if (response.code == 'SUCCESS_POST') {
+					callback(true);
+				}else{
+					callback(false);
+				}
+			})
+		}
+
+		function deleteVaccine(id, callback) {
+			$http.delete($rootScope.baseUrl + '/api/vaksin/' + id)
+				.success(function(response) {
+					if (response.code == 'SUCCESS_DELETE') {
+						callback(true);
+					}else{
+						callback(false);
+					}
+				})
+		}
+
+		function update(id, name, callback) {
+			$http.put($rootScope.baseUrl + '/api/vaksin/' + id, {
+				name:name
+			}).success(function(response) {
+				if (response.code == 'SUCCESS_PUT') {
 					callback(true);
 				}else{
 					callback(false);

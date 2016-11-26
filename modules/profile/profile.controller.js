@@ -5,7 +5,7 @@
 		.module('simuni')
 		.controller('profileController', controller);
 
-	function controller(userService) {
+	function controller(userService, $rootScope) {
 		var vm = this;
 		vm.input = {};
 		vm.update = update;
@@ -31,6 +31,7 @@
 				userService.updateUser(vm.input, function(result) {
 					if (result) {
 						vm.failUpdate = false;
+						$rootScope.name = vm.input.name;
 					}
 				});
 			}

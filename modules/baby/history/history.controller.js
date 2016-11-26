@@ -9,11 +9,12 @@
 		// vm.number = 1;
 		vm.schedules = [];
 
-		// getData();
+		getData();
 
 		function getData() {
 			scheduleService.getByBabyDone(function(result) {
 				if (result) {
+					console.log(result);
 					vm.schedules = result;
 				}
 			});

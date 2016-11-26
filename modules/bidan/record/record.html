@@ -13,8 +13,9 @@
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">Jadwal Imunisasi</label>
           <div class="col-sm-10">
-            <select class="form-control" ng-model="vm.input.schedule" required>
-              <option ng-repeat="schedule in vm.schedules" value="{{schedule.schedule_date}}">{{schedule.schedule_date}} ({{schedule.location}})</option>
+            <select class="form-control" ng-model="vm.input.schedule" ng-options="schedule as (schedule.schedule_date + ' (' + schedule.location + ')') for schedule in vm.schedules" required>
+              <option></option>
+              <!-- <option ng-repeat="schedule in vm.schedules" value="{{schedule}}">{{schedule.schedule_date}} ({{schedule.location}})</option> -->
             </select>
             <span class="help-block">Pilih tanggal imunisasi dilakukan</span>
           </div>
@@ -22,20 +23,21 @@
           <label class="col-sm-2 col-sm-2 control-label">Bayi</label>
           <div class="col-sm-10">
             <ui-select multiple ng-model="vm.input.babies" close-on-select="false">
-              <ui-select-match placeholder="Pilih bayi yang diimunisasi">{{$item.user.name}}</ui-select-match>
-              <ui-select-choices repeat="baby.user.id as baby in vm.babies | filter: $select.search track by $index">
-                <div ng-bind-html="baby.user.name | highlight: $select.search"></div>
+              <ui-select-match placeholder="Pilih bayi yang diimunisasi">{{$item.name}}</ui-select-match>
+              <ui-select-choices repeat="baby.id as baby in vm.babies | filter: $select.search track by $index">
+                <div ng-bind-html="baby.name | highlight: $select.search"></div>
                 <small>
-                  username : <span ng-bind-html="baby.user.username | highlight: $select.search"></span>
+                  username : <span ng-bind-html="baby.username | highlight: $select.search"></span>
                 </small>
               </ui-select-choices>
             </ui-select>
             <span class="help-block">Pilih bayi yang diimunisasi (bisa lebih dari 1)</span>
           </div>
-          <label class="col-sm-2 col-sm-2 control-label">Jadwal Imunisasi</label>
+          <label class="col-sm-2 col-sm-2 control-label">Jenis Imunisasi</label>
           <div class="col-sm-10">
-            <select class="form-control" ng-model="vm.input.vaccine" required>
-              <option ng-repeat="vaccine in vm.vaccines" value="{{vaccine.id}}">{{vaccine.name}}</option>
+            <select class="form-control" ng-model="vm.input.vaccine" ng-options="vaccine as (vaccine.id + '. ' + vaccine.name) for vaccine in vm.vaccines" required>
+              <option></option>
+              <!-- <option ng-repeat="vaccine in vm.vaccines" value="{{vaccine.id}}">{{vaccine.name}}</option> -->
             </select>
             <span class="help-block">Pilih jenis imunisasi</span>
           </div>
